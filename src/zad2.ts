@@ -1,4 +1,23 @@
 import { UndirectedGraph, NodeId } from './UndirectedGraph';
+import { LinearGraphFactory, TriangleGraphFactory, CustomGraphFactory, ComplexGraphFactory } from './GraphFactory';
+
+/**
+ * zad 2: 
+Napisać program do szukania wszystkich mostów lokalnych i globalnych grafie.
+
+
+
+podpowiedz:
+
+- Most globalny - > przeszukiwanie grafu, usuniecie wezla i sprawdzenie czy zadzialalo kolejne przeszukanie grafu
+
+
+- Most lokalny - > sprawdzamy czy dwa punkty mają między sobą innych sąsiadów
+
+
+
+GRAFY NIESKIEROWANE
+ */
 
 /**
  * Reprezentacja krawędzi (mostu)
@@ -176,9 +195,7 @@ export class BridgeAnalysis {
   }
 }
 
-// --- PRZYKŁAD UŻYCIA ---
 
-import { LinearGraphFactory, TriangleGraphFactory, CustomGraphFactory, ComplexGraphFactory } from './GraphFactory';
 
 const linearFactory = new LinearGraphFactory();
 const linearGraph = linearFactory.createGraph();

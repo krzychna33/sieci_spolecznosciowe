@@ -1,6 +1,29 @@
 import { UndirectedGraph, NodeId } from './UndirectedGraph';
 import { LinearGraphFactory, StarGraphFactory, SquareGraphFactory } from './GraphFactory';
 
+
+/**
+ * zad 3:
+
+Symulacja w której jest w pełni polaczony graf i mamy tu petle ( w teorii nieskonczona -> osiagniecie full connectivity, ile krawędzi musi być żeby było full connectivity).
+
+
+ile iteracji jest potrzebne, żeby graf się w pełni połączył jeżeli każdy wezel ma szanse na polaczenie się z innym wezlem, oraz przez zamkniecie triadyczne które ma wieksza szanse
+
+
+- polaczenie losowe 10%
+
+- polaczenie jako domkniecie triadyczne 50%
+
+
+
+wynikiem programu ma być ilość iteracji potrzebnych
+
+
+
+GRAFY NIESKIEROWANE
+ */
+
 /**
  * Potencjalne połączenie między węzłami
  */
@@ -10,9 +33,7 @@ interface PotentialConnection {
   isTriadicClosure: boolean; // true jeśli to domknięcie triadyczne
 }
 
-/**
- * Symulacja ewolucji grafu przez domknięcia triadyczne i losowe połączenia
- */
+
 class GraphEvolutionSimulation {
   private graph: UndirectedGraph;
   private triadicClosureProbability: number;
@@ -208,29 +229,21 @@ class GraphEvolutionSimulation {
   }
 }
 
-// --- PRZYKŁAD UŻYCIA ---
-
-console.log('═'.repeat(60));
 console.log('SYMULACJA 1: Graf liniowy (A--B--C--D)');
-console.log('═'.repeat(60));
 
 const linearFactory = new LinearGraphFactory();
 const linearGraph = linearFactory.createGraph();
 const sim1 = new GraphEvolutionSimulation(linearGraph, 0.5, 0.1);
 sim1.simulate();
 
-console.log('═'.repeat(60));
 console.log('SYMULACJA 2: Graf gwiazdy');
-console.log('═'.repeat(60));
 
 const starFactory = new StarGraphFactory();
 const starGraph = starFactory.createGraph();
 const sim2 = new GraphEvolutionSimulation(starGraph, 0.5, 0.1);
 sim2.simulate();
 
-console.log('═'.repeat(60));
 console.log('SYMULACJA 3: Graf kwadratowy');
-console.log('═'.repeat(60));
 
 const squareFactory = new SquareGraphFactory();
 const squareGraph = squareFactory.createGraph();

@@ -2,8 +2,25 @@ import { UndirectedGraph, NodeId } from './UndirectedGraph';
 import { CustomGraphFactory, SocialNetworkGraphFactory, StarGraphFactory } from './GraphFactory';
 
 /**
- * Klasa do analizy triadycznej grafu (używa kompozycji)
+ * zad 1:
+
+znaleźć trójkąty i potencjalne domknięcia triadyczne
+
+
+Napisać do program do znajdywania trójkątów i potencjalnych domknięć triadycznych.
+
+
+Grafy nieskierowane
+
+podpowiedz:
+
+- potencjalne domkniecia triadyczne -> sprawdzamy wezel i jego sasiadow, następnie sprawdzamy czy sasiady maja polaczenia miedzy sobą.
+
+
+- trojkat -> prawie jak domkniecie triadyczne, ale sprawdzamy czy sa sasiadami
  */
+
+
 class TriadicAnalysis {
   private graph: UndirectedGraph;
 
@@ -17,7 +34,7 @@ class TriadicAnalysis {
    */
   findTriangles(): NodeId[][] {
     const triangles: NodeId[][] = [];
-    const nodes = this.getAllNodes();
+    const nodes = this.graph.getAllNodes();
 
     // Iterujemy po wszystkich możliwych trójkach
     // Używamy sortowania/warunków indeksów, aby uniknąć duplikatów 
@@ -27,7 +44,7 @@ class TriadicAnalysis {
       const uNeighbors = this.graph.getNeighbors(u);
 
       for (const v of uNeighbors) {
-        // Warunek porządkujący: sprawdzamy tylko jeśli v > u (leksykalnie lub logicznie)
+        // Warunek porządkujący
         if (v <= u) continue;
 
         const vNeighbors = this.graph.getNeighbors(v);
@@ -53,7 +70,7 @@ class TriadicAnalysis {
    */
   findPotentialClosures() {
     const suggestions: { u: NodeId; w: NodeId; bridge: NodeId }[] = [];
-    const nodes = this.getAllNodes();
+    const nodes = this.graph.getAllNodes();
 
     // Iterujemy po każdym wierzchołku, traktując go jako potencjalny "most" (bridge)
     for (const bridge of nodes) {
@@ -75,17 +92,8 @@ class TriadicAnalysis {
     return suggestions;
   }
 
-  /**
-   * Metoda pomocnicza do pobierania wszystkich węzłów z grafu
-   */
-  private getAllNodes(): NodeId[] {
-    return this.graph.getAllNodes();
-  }
 }
 
-// --- PRZYKŁAD UŻYCIA ---
-
-// Tworzymy graf za pomocą fabryki
 const graphFactory = new SocialNetworkGraphFactory();
 const graph1 = graphFactory.createGraph();
 
@@ -95,21 +103,19 @@ const graph2 = graph2Factory.createGraph();
 const graph3Factory = new CustomGraphFactory();
 const graph3 = graph3Factory.createGraph();
 
-const graphs = [graph1, graph2, graph3];
+const graphs = [graph3];
 
 for (const graph of graphs) {
     console.log("--- GRAF ---");
-    console.log(`Opis: ${graphFactory.getDescription()}`);
     console.log(graph);
 
-    // Tworzymy obiekt analizy triadycznej
     const analysis = new TriadicAnalysis(graph);
 
-    console.log("\n--- ZNALEZIONE TRÓJKĄTY (Silne klastry) ---");
+    console.log("\n--- ZNALEZIONE TRÓJKĄTY ---");
     const triangles = analysis.findTriangles();
     triangles.forEach(t => console.log(`Trójkąt: ${t.join(' <-> ')}`));
 
-    console.log("\n--- POTENCJALNE DOMKNIĘCIA (Rekomendacje) ---");
+    console.log("\n--- POTENCJALNE DOMKNIĘCIA ---");
     const closures = analysis.findPotentialClosures();
     closures.forEach(c => {
     console.log(`Rekomendacja: ${c.u} i ${c.w} mogą się poznać przez: ${c.bridge}`);
