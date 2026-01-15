@@ -33,10 +33,6 @@ interface SuperNode {
  */
 export class SuperNodeBalanceChecker {
   
-  /**
-   * Znajduje superwęzły używając prostego BFS.
-   * Superwęzeł = grupa wierzchołków połączonych krawędziami +
-   */
   findSuperNodes(graph: LabeledGraph): SuperNode[] {
     const nodes = graph.getAllNodes();
     const visited = new Set<NodeId>();
@@ -101,8 +97,8 @@ export class SuperNodeBalanceChecker {
   
   /**
    * Próbuje pokolorować superwęzły na 2 kolory.
-   * Superwęzły połączone krawędzią - muszą mieć różne kolory.
-   */
+   * 
+  */
   partitionSuperNodes(
     graph: LabeledGraph,
     superNodes: SuperNode[]
@@ -137,7 +133,6 @@ export class SuperNodeBalanceChecker {
       }
     }
     
-    // Kolorowanie BFS
     const colors = new Map<number, number>();
     
     for (let startId = 0; startId < superNodes.length; startId++) {
@@ -171,9 +166,6 @@ export class SuperNodeBalanceChecker {
     return { success: true, groupX, groupY };
   }
   
-  /**
-   * Sprawdza czy graf jest zrównoważony używając podejścia z superwęzłami.
-   */
   isBalanced(graph: LabeledGraph): boolean {
     const superNodes = this.findSuperNodes(graph);
     const integrity = this.checkSuperNodesIntegrity(graph, superNodes);
@@ -186,9 +178,6 @@ export class SuperNodeBalanceChecker {
     return partition.success;
   }
   
-  /**
-   * Wyświetla szczegółową analizę równowagi grafu.
-   */
   printAnalysis(graph: LabeledGraph, description: string): void {
     console.log(`\n=== ${description} ===`);
     console.log(`Liczba wierzchołków: ${graph.getNodeCount()}`);

@@ -83,9 +83,6 @@ export class BridgeAnalysis {
 
   /**
    * Sprawdza czy graf jest rozspójniony po usunięciu danej krawędzi
-   * @param removedEdge - krawędź do usunięcia
-   * @param nodes - wszystkie węzły grafu
-   * @returns true jeśli graf jest rozspójniony (krawędź jest mostem)
    */
   private isGraphDisconnectedWithoutEdge(removedEdge: Edge, nodes: NodeId[]): boolean {
     if (nodes.length === 0) return false;

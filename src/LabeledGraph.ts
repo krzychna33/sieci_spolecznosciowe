@@ -1,16 +1,10 @@
 export type NodeId = string;
 
-/**
- * Typ etykiety krawędzi: Plus (+) lub Minus (-)
- */
 export enum EdgeLabel {
   Plus = '+',
   Minus = '-'
 }
 
-/**
- * Typ reprezentujący krawędź z etykietą
- */
 type LabeledEdge = {
   target: NodeId;
   label: EdgeLabel;
@@ -20,25 +14,18 @@ type LabeledEdge = {
  * Klasa reprezentująca graf nieskierowany z krawędziami oznaczonymi jako + lub -
  */
 export class LabeledGraph {
-  // Mapa przechowująca wierzchołki i zbiór ich sąsiadów z etykietami krawędzi
   private adjacencyList: Map<NodeId, Map<NodeId, EdgeLabel>>;
 
   constructor() {
     this.adjacencyList = new Map();
   }
 
-  /**
-   * Dodaje wierzchołek do grafu (jeśli nie istnieje)
-   */
   addNode(node: NodeId): void {
     if (!this.adjacencyList.has(node)) {
       this.adjacencyList.set(node, new Map());
     }
   }
 
-  /**
-   * Dodaje krawędź nieskierowaną z etykietą między dwoma wierzchołkami
-   */
   addEdge(node1: NodeId, node2: NodeId, label: EdgeLabel): void {
     this.addNode(node1);
     this.addNode(node2);
@@ -47,32 +34,19 @@ export class LabeledGraph {
     this.adjacencyList.get(node2)!.set(node1, label);
   }
 
-  /**
-   * Sprawdza, czy istnieje krawędź między wierzchołkami
-   */
   hasEdge(node1: NodeId, node2: NodeId): boolean {
     return this.adjacencyList.get(node1)?.has(node2) ?? false;
   }
 
-  /**
-   * Zwraca etykietę krawędzi między dwoma wierzchołkami
-   * @returns EdgeLabel jeśli krawędź istnieje, undefined jeśli nie
-   */
   getEdgeLabel(node1: NodeId, node2: NodeId): EdgeLabel | undefined {
     return this.adjacencyList.get(node1)?.get(node2);
   }
 
-  /**
-   * Zwraca listę wszystkich sąsiadów danego wierzchołka
-   */
   getNeighbors(node: NodeId): NodeId[] {
     const neighbors = this.adjacencyList.get(node);
     return neighbors ? Array.from(neighbors.keys()) : [];
   }
 
-  /**
-   * Zwraca listę sąsiadów wraz z etykietami krawędzi
-   */
   getNeighborsWithLabels(node: NodeId): LabeledEdge[] {
     const neighbors = this.adjacencyList.get(node);
     if (!neighbors) return [];
@@ -83,9 +57,6 @@ export class LabeledGraph {
     }));
   }
 
-  /**
-   * Zwraca listę wszystkich wierzchołków w grafie
-   */
   getAllNodes(): NodeId[] {
     return Array.from(this.adjacencyList.keys());
   }
@@ -110,16 +81,10 @@ export class LabeledGraph {
     return edges;
   }
 
-  /**
-   * Zwraca liczbę wierzchołków w grafie
-   */
   getNodeCount(): number {
     return this.adjacencyList.size;
   }
 
-  /**
-   * Zwraca liczbę krawędzi w grafie
-   */
   getEdgeCount(): number {
     let count = 0;
     for (const neighbors of this.adjacencyList.values()) {

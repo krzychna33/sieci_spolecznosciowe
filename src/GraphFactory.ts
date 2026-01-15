@@ -1,17 +1,7 @@
 import { UndirectedGraph, NodeId } from './UndirectedGraph';
 
-/**
- * Interfejs dla fabryk grafów
- */
 export interface IGraphFactory {
-  /**
-   * Tworzy i zwraca skonfigurowany graf
-   */
   createGraph(): UndirectedGraph;
-  
-  /**
-   * Zwraca nazwę/opis grafu
-   */
   getDescription(): string;
 }
 
@@ -168,7 +158,7 @@ export class SquareGraphFactory implements IGraphFactory {
 }
 
 /**
- * Graf niestandardowy ze zdjęcia
+ * Graf niestandardowy
  * Struktura: G--B--F--E--D--C
  *               |     |  |  |
  *               +--A--+--+--+
@@ -191,13 +181,13 @@ export class CustomGraphFactory implements IGraphFactory {
   }
   
   getDescription(): string {
-    return 'Graf niestandardowy (ze zdjęcia): G, B, F, E, A, D, C';
+    return 'Graf niestandardowy: G, B, F, E, A, D, C';
   }
 }
 
 /**
- * Graf złożony ze zdjęcia
- * Kompleksowa struktura z wieloma trójkątami i kwadratami
+ * Graf złożony
+ * z wieloma trójkątami i kwadratami
  */
 export class ComplexGraphFactory implements IGraphFactory {
   createGraph(): UndirectedGraph {

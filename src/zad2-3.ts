@@ -31,7 +31,7 @@ interface Cycle {
  * Klasa sprawdzająca równowagę grafu poprzez znalezienie wszystkich cykli
  * i sprawdzenie czy każdy z nich ma parzystą liczbę krawędzi ujemnych.
  * 
- * Graf jest zrównoważony wtedy i tylko wtedy, gdy każdy cykl ma parzystą liczbę
+ * Graf jest zrównoważony wtedy gdy każdy cykl ma parzystą liczbę
  * krawędzi negatywnych.
  */
 export class CycleBasedBalanceChecker {
@@ -39,9 +39,6 @@ export class CycleBasedBalanceChecker {
   /**
    * Znajduje wszystkie cykle proste (elementarne) w grafie.
    * Cykl prosty to taki, w którym żaden wierzchołek nie powtarza się (poza pierwszym i ostatnim).
-   * 
-   * @param graph - Graf do przeszukania
-   * @returns Lista wszystkich cykli
    */
   findAllCycles(graph: LabeledGraph): Cycle[] {
     const nodes = graph.getAllNodes();
@@ -156,10 +153,7 @@ export class CycleBasedBalanceChecker {
   
   /**
    * Sprawdza, czy graf jest zrównoważony.
-   * Graf jest zrównoważony, gdy każdy cykl ma parzystą liczbę krawędzi negatywnych.
-   * 
-   * @param graph - Graf do sprawdzenia
-   * @returns true jeśli graf jest zrównoważony, false w przeciwnym wypadku
+   * Graf jest zrównoważony, gdy każdy cykl ma parzystą liczbę krawędzi negatywnych
    */
   isBalanced(graph: LabeledGraph): boolean {
     const cycles = this.findAllCycles(graph);

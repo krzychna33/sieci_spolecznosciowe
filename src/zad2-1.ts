@@ -14,25 +14,11 @@ import {
  * (sprawdzić elementarne cykle - jeśli trójkąt jest niezrównoważony to znaczy że cały graf też jest niezrównoważony.. chyba...)
  */
 
-/**
- * Klasa sprawdzająca czy graf w pełni połączony jest zrównoważony.
- * 
- * Graf jest zrównoważony wtedy i tylko wtedy, gdy każdy trójkąt ma parzystą liczbę
- * krawędzi negatywnych (0 lub 2).
- * 
- * Jeśli znajdziesz choć jeden niezrównoważony trójkąt, cały graf jest niezrównoważony.
- */
 export class GraphBalanceChecker {
   
   /**
    * Sprawdza, czy trójkąt jest zrównoważony.
    * Trójkąt jest zrównoważony, gdy ma parzystą liczbę krawędzi negatywnych (0 lub 2).
-   * 
-   * @param graph - Graf
-   * @param node1 - Pierwszy wierzchołek trójkąta
-   * @param node2 - Drugi wierzchołek trójkąta
-   * @param node3 - Trzeci wierzchołek trójkąta
-   * @returns true jeśli trójkąt jest zrównoważony
    */
   private isTriangleBalanced(
     graph: LabeledGraph, 
@@ -61,9 +47,6 @@ export class GraphBalanceChecker {
   
   /**
    * Znajduje wszystkie trójkąty w grafie i sprawdza ich zrównoważenie.
-   * 
-   * @param graph - Graf do sprawdzenia
-   * @returns Lista niezrównoważonych trójkątów
    */
   findUnbalancedTriangles(graph: LabeledGraph): Array<{
     nodes: [NodeId, NodeId, NodeId];
@@ -116,9 +99,6 @@ export class GraphBalanceChecker {
   /**
    * Sprawdza, czy graf jest zrównoważony.
    * Jeśli znajdzie choć jeden niezrównoważony trójkąt, graf jest niezrównoważony.
-   * 
-   * @param graph - Graf do sprawdzenia
-   * @returns true jeśli graf jest zrównoważony, false w przeciwnym wypadku
    */
   isBalanced(graph: LabeledGraph): boolean {
     const unbalancedTriangles = this.findUnbalancedTriangles(graph);

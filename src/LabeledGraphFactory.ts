@@ -1,17 +1,7 @@
 import { LabeledGraph, NodeId, EdgeLabel } from './LabeledGraph';
 
-/**
- * Interfejs dla fabryk grafów z etykietowanymi krawędziami
- */
 export interface ILabeledGraphFactory {
-  /**
-   * Tworzy i zwraca skonfigurowany graf z etykietami
-   */
   createGraph(): LabeledGraph;
-  
-  /**
-   * Zwraca nazwę/opis grafu
-   */
   getDescription(): string;
 }
 
@@ -79,7 +69,7 @@ export class BalancedQuadFactory implements ILabeledGraphFactory {
 }
 
 /**
- * Graf niezrównoważony z 4 wierzchołkami (prawy na obrazku)
+ * Graf niezrównoważony z 4 wierzchołkami
  * A-B(-), A-C(+), A-D(-), B-C(+), B-D(+), C-D(-)
  */
 export class UnbalancedQuadFactory implements ILabeledGraphFactory {
@@ -102,7 +92,7 @@ export class UnbalancedQuadFactory implements ILabeledGraphFactory {
 }
 
 /**
- * Kompleksowy graf z 15 wierzchołkami - przykład z diagramu
+ * Kompleksowy graf z 15 wierzchołkami 
  * Graf nie jest w pełni połączony, zawiera wiele trójkątów i cykli
  */
 export class ComplexNetwork15Factory implements ILabeledGraphFactory {
