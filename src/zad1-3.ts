@@ -141,10 +141,6 @@ class GraphEvolutionSimulation {
     return count / 2; // Każda krawędź policzona dwukrotnie
   }
 
-  /**
-   * Wykonuje jedną iterację symulacji
-   * @returns liczba dodanych połączeń
-   */
   private performIteration(): number {
     let addedConnections = 0;
 
@@ -169,9 +165,6 @@ class GraphEvolutionSimulation {
     return addedConnections;
   }
 
-  /**
-   * Uruchamia symulację i zwraca liczbę iteracji potrzebnych do pełnego połączenia
-   */
   simulate(maxIterations: number = 1000): {
     iterations: number;
     completed: boolean;
@@ -183,7 +176,7 @@ class GraphEvolutionSimulation {
     const maxPossibleEdges = (n * (n - 1)) / 2;
     const initialEdges = this.countEdges();
 
-    console.log(`\nRozpoczynanie symulacji:`);
+    console.log(`\nSymulacja...:`);
     console.log(`  Węzły: ${n}`);
     console.log(`  Początkowe krawędzie: ${initialEdges}`);
     console.log(`  Maksymalne możliwe krawędzie: ${maxPossibleEdges}`);
@@ -214,11 +207,11 @@ class GraphEvolutionSimulation {
     const finalEdges = this.countEdges();
     const completed = this.isComplete();
 
-    console.log(`\nWynik symulacji:`);
+    console.log(`\nWynik :`);
     console.log(`  Iteracje: ${iteration}`);
     console.log(`  Graf pełny: ${completed ? 'TAK' : 'NIE'}`);
     console.log(`  Końcowe krawędzie: ${finalEdges}/${maxPossibleEdges}`);
-    console.log(`  Stopień wypełnienia: ${((finalEdges / maxPossibleEdges) * 100).toFixed(2)}%\n`);
+    console.log(`  Stopień wypełnienia: ${((finalEdges / maxPossibleEdges) * 100)}%\n`);
 
     return {
       iterations: iteration,

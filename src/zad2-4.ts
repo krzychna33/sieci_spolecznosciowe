@@ -201,13 +201,13 @@ export class SuperNodeBalanceChecker {
     const integrity = this.checkSuperNodesIntegrity(graph, superNodes);
     console.log(`\n--- Krok 2: Sprawdzenie integralności superwęzłów ---`);
     if (integrity.valid) {
-      console.log('✓ Brak krawędzi ujemnych wewnątrz superwęzłów');
+      console.log('Brak krawędzi ujemnych wewnątrz superwęzłów');
     } else {
-      console.log('✗ Znaleziono krawędzie ujemne wewnątrz superwęzłów:');
+      console.log('Znaleziono krawędzie ujemne wewnątrz superwęzłów:');
       integrity.conflicts.forEach(({ superNode, edge }) => {
         console.log(`  Superwęzeł ${superNode}: ${edge[0]} --(--)-- ${edge[1]}`);
       });
-      console.log('\n✗ Graf NIE JEST zrównoważony (krawędzie ujemne w superwęźle)');
+      console.log('\nGraf NIE JEST zrównoważony (krawędzie ujemne w superwęźle)');
       return;
     }
     
@@ -215,7 +215,7 @@ export class SuperNodeBalanceChecker {
     const partition = this.partitionSuperNodes(graph, superNodes);
     console.log(`\n--- Krok 3: Podział superwęzłów na grupy ---`);
     if (partition.success) {
-      console.log('✓ Udało się podzielić superwęzły na dwie grupy:');
+      console.log('Udało się podzielić superwęzły na dwie grupy:');
       console.log(`  Grupa X: [${partition.groupX!.map(id => {
         const sn = superNodes.find(s => s.id === id)!;
         return `SN${id}(${Array.from(sn.nodes).join(',')})`;
@@ -224,10 +224,10 @@ export class SuperNodeBalanceChecker {
         const sn = superNodes.find(s => s.id === id)!;
         return `SN${id}(${Array.from(sn.nodes).join(',')})`;
       }).join(', ')}]`);
-      console.log('\n✓ Graf JEST zrównoważony');
+      console.log('\nGraf JEST zrównoważony');
     } else {
-      console.log('✗ Nie udało się podzielić superwęzłów na dwie grupy');
-      console.log('\n✗ Graf NIE JEST zrównoważony');
+      console.log('Nie udało się podzielić superwęzłów na dwie grupy');
+      console.log('\nGraf NIE JEST zrównoważony');
     }
   }
 }

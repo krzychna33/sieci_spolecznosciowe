@@ -110,13 +110,13 @@ export class GraphBalanceChecker {
    */
   printAnalysis(graph: LabeledGraph, description: string): void {
     console.log(`\n=== ${description} ===`);
-    console.log(`Liczba wierzchołków: ${graph.getNodeCount()}`);
-    console.log(`Liczba krawędzi: ${graph.getEdgeCount()}`);
+    console.log(`Nodes: ${graph.getNodeCount()}`);
+    console.log(`Edges: ${graph.getEdgeCount()}`);
     
     const edges = graph.getAllEdges();
     console.log('\nKrawędzie:');
     edges.forEach(({ node1, node2, label }) => {
-      console.log(`  ${node1} --${label}-- ${node2}`);
+      console.log(`  ${node1} --${label}--- ${node2}`);
     });
     
     const unbalancedTriangles = this.findUnbalancedTriangles(graph);

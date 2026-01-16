@@ -63,9 +63,7 @@ class TriadicAnalysis {
   }
 
   /**
-   * 2. Znajduje potencjalne domknięcia triadyczne (Otwarte triady)
-   * Czyli sytuacje: A zna B, B zna C, ale A NIE zna C.
-   * Zwraca obiekty wskazujące kogo można połączyć i kto jest mostem
+   * Znajduje potencjalne domknięcia triadyczne (Otwarte triady)
    */
   findPotentialClosures() {
     const suggestions: { u: NodeId; w: NodeId; bridge: NodeId }[] = [];

@@ -60,7 +60,7 @@ export class PageRank {
     return { ranks, iterations: maxIterations, conv: false };
   }
 
-  // Wariant 2: PageRank z tłumieniem (damping)
+  // Wariant 2: PageRank z dampingiem
   calculateDamped(options: PageRankOptions): PageRankResult {
     const { maxIterations, epsilon, dampingFactor = 0.85 } = options;
     const nodes = this.graph.getAllNodes();

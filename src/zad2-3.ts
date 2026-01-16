@@ -62,8 +62,7 @@ export class CycleBasedBalanceChecker {
   }
   
   /**
-   * Rekurencyjnie znajduje cykle zaczynające się od danego węzła.
-   * Używa DFS z backtrackingiem.
+   * Rekurencyjnie znajduje cykle zaczynające się od danego węzła
    */
   private findCyclesFromNode(
     graph: LabeledGraph,
@@ -127,8 +126,7 @@ export class CycleBasedBalanceChecker {
   }
   
   /**
-   * Normalizuje cykl do unikalnej reprezentacji (do wykrywania duplikatów).
-   * Cykl [A, B, C] jest tym samym co [B, C, A] i [C, B, A] (odwrócony).
+   * Normalizuje cykl (do wykrywania duplikatów)
    */
   private normalizeCycle(cycle: NodeId[]): string {
     // Znajdź minimalny element
@@ -201,7 +199,7 @@ export class CycleBasedBalanceChecker {
     if (allCycles.length > 0 && allCycles.length <= 20) {
       console.log('\nWszystkie cykle:');
       allCycles.forEach((cycle, index) => {
-        const status = cycle.negativeCount % 2 === 0 ? '✓ zrównoważony' : '✗ niezrównoważony';
+        const status = cycle.negativeCount % 2 === 0 ? 'zrównoważony' : 'niezrównoważony';
         console.log(`  ${index + 1}. [${cycle.nodes.join(' → ')} → ${cycle.nodes[0]}] - ${cycle.negativeCount} krawędzi ujemnych ${status}`);
       });
     } else if (allCycles.length > 20) {
